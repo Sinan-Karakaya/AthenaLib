@@ -13,18 +13,16 @@ void Athena::AString::trim(std::string &str)
     str.erase(str.find_last_not_of("\t\n\v\f\r ") + 1); // right trim
 }
 
-std::vector<std::string> Athena::AString::split(const std::string &str, const std::string &delim)
+std::vector<std::string> Athena::AString::split(const std::string &str, char delim)
 {
     std::vector<std::string> result;
     std::stringstream ss(str);
 
     while (ss.good()) {
         std::string substr;
-        for (char c : delim) {
-            std::getline(ss, substr, c);
-            if (!substr.empty())
-                result.push_back(substr);
-        }
+        std::getline(ss, substr, delim);
+        if (!substr.empty())
+            result.push_back(substr);
     }
     return result;
 }
